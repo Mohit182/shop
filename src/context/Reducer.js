@@ -1,4 +1,3 @@
-import { CallToActionRounded } from "@material-ui/icons";
 
 export const initialState = {
   basket: [],

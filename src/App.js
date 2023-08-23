@@ -1,21 +1,22 @@
-import logo from "./logo.svg";
-import "./App.css";
+import "../src/styles/styles.css";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes as Switch,
   Route,
 } from "react-router-dom";
+import Login from "./routes/Login/Login";
+import Dashboard from "./routes/Dashboard/Dashboard";
+import List from "./routes/List/List";
+
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/login">
-            <h1>Login Page</h1>
-          </Route>
-          <Route path="/">
-            <h1>Home Page</h1>
-          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/list/:id" element={<List />} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Switch>
       </div>
     </Router>
