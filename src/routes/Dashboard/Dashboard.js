@@ -15,44 +15,17 @@ const Dashboard = () => {
   };
 
   React.useEffect(() => {
-    db.collection("clients/")
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          setClients((prev) => [
-            ...prev,
-            { id: doc.id, name: doc.data().name },
-          ]);
-        });
+    const getClients = async () => {
+      const q = query(collection(db, "clients"));
+      const querySnapshot = await getDocs(q);
+      const tempClients = [];
+      querySnapshot.forEach((doc) => {
+        tempClients.push({ id: doc.id, ...doc.data() });
       });
-  }, []);
-
-  //   when all the clients are fetched, the clients array is set to the state
-  //   the clients array is then mapped to display the client size using the below useEffect
-
-  React.useEffect(() => {
-    clients.map((client) => {
-      db.collection("clients/" + client.id + "/85%")
-        .get()
-        .then((snapshot) => {
-          const size85 = snapshot.size || 0;
-
-          db.collection("clients/" + client.id + "/92%")
-            .get()
-            .then((snapshot) => {
-              const size92 = snapshot.size || 0;
-
-              setClients((prev) =>
-                prev.map((item) =>
-                  item.id === client.id
-                    ? { ...item, size: size85 + size92 }
-                    : item
-                )
-              );
-            });
-        });
-    });
-  }, []);
+      setClients(tempClients);
+    };
+    getClients();
+  }, [addHandler]);
 
   return (
     <div>
@@ -83,14 +56,18 @@ const Dashboard = () => {
         </Button>
       </div>
       <Grid container spacing={3}>
-        {clients.map((client) => (
-          <Grid item xs={12} md={6} lg={3} key={client.id}>
-            <div className="dashboard-card" onClick={() => history(`/list/${client.id}`)}>
-              <h4 className="card-title">{client.name}</h4>
-              <div className="card-body">{client.size} entries</div>
-            </div>
-          </Grid>
-        ))}
+        {clients &&
+          clients.map((client) => (
+            <Grid item xs={12} md={6} lg={3} key={client.id}>
+              <div
+                className="dashboard-card"
+                onClick={() => history(`/list/${client.id}`)}
+              >
+                <h4 className="card-title">{client.name}</h4>
+                <div className="card-body">{client.size} entries</div>
+              </div>
+            </Grid>
+          ))}
       </Grid>
       {/* </Paper> */}
       {addHandler && <AddPopUp addHandlerToggle={addHandlerToggle} />}

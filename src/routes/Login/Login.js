@@ -35,9 +35,6 @@ function Login() {
 
   return (
     <div className="login">
-      {/* <Link to="/">
-        <img className="login-logo" src={amazonLogo} />
-      </Link> */}
       <div
         className="login-container"
         style={{
