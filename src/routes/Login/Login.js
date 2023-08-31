@@ -4,17 +4,20 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { Button, TextField } from "@mui/material";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const signInHandler = (e) => {
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
+        setCookie("token", auth.user.token, { path: "/" });
         history("/");
       })
       .catch((error) => alert(error.message));

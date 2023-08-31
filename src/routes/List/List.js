@@ -154,6 +154,7 @@ const List = () => {
                 <p>{item.date}</p>
                 <p>{item.weight}</p>
                 <p>{item.remark}</p>
+                
               </div>
             ))}
 
