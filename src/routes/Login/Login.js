@@ -17,18 +17,16 @@ function Login() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
-        setCookie("token", auth.user.token, { path: "/" });
+        setCookie("token", auth.user.refreshToken, { path: "/" });
         history("/");
       })
       .catch((error) => alert(error.message));
   };
   const registerHandler = (e) => {
     e.preventDefault();
-
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
-        console.log(auth);
         if (auth) {
           history("/");
         }

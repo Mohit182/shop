@@ -5,7 +5,7 @@ import App from "./App";
 import { StateProvider } from "./StateProvider";
 import { initialState, reducer } from "./context/Reducer";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes as Switch,
   Route,
 } from "react-router-dom";

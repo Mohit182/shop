@@ -4,11 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import AddPopUp from "./components/AddPopUp";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { useCookies } from "react-cookie";
 
 const Dashboard = () => {
   const history = useNavigate();
   const [clients, setClients] = React.useState([]);
   const [addHandler, setAddHandler] = React.useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+
+  React.useEffect(() => {
+    if (cookies.token === undefined || cookies.token === null) {
+      history("/login");
+    }
+  }, [cookies.token]);
 
   const addHandlerToggle = () => {
     setAddHandler(!addHandler);
@@ -34,7 +42,7 @@ const Dashboard = () => {
           display: "flex",
           justifyContent: "space-between",
           width: "100%",
-          marginTop:"70px"
+          marginTop: "70px",
         }}
       >
         <h4
@@ -65,7 +73,7 @@ const Dashboard = () => {
                 onClick={() => history(`/list/${client.id}`)}
               >
                 <h4 className="card-title">{client.name}</h4>
-                <div className="card-body">{client.size} entries</div>
+                {/* <div className="card-body">{client.size} entries</div> */}
               </div>
             </Grid>
           ))}

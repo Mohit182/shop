@@ -60,7 +60,29 @@
 }
 
 .pop-up-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.web {
+  display: block;
+}
+.mobile {
+  display: none !important;
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .web {
+    display: none;
   }
+  .mobile {
+    display: flex !important;
+  }
+}

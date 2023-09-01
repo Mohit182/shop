@@ -1,10 +1,5 @@
 import "../src/styles/styles.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./routes/Login/Login";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import List from "./routes/List/List";
@@ -20,6 +15,7 @@ function App() {
     setToken(cookies.token);
   }, [cookies.token]);
 
+
   return (
     <div className="App">
       {token !== undefined && token !== null && (
@@ -31,49 +27,20 @@ function App() {
           }}
           style={{
             position: "absolute",
-            top: "10px",
-            right: "10px",
+            top: "0",
+            right: "0",
             margin: "10px",
           }}
+          sx={{ margin: "10px" }}
         >
           Logout
         </Button>
       )}
       <Routes>
         <Route exact path="/login" element={<Login />} />
-        <Route
-          exact
-          path="/"
-          element={
-            token !== undefined && token !== null && token ? (
-              <Dashboard />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          exact
-          path="/list/:id"
-          element={
-            token !== undefined && token !== null && token ? (
-              <List />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        {/* all extra routes redirect to "/" if token present, if not redirect to "/login" */}
-        <Route
-          path="*"
-          element={
-            token !== undefined && token !== null && token ? (
-              <Navigate to="/" />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        <Route exact path="/" element={<Dashboard />} />
+        <Route exact path="/list/:id" element={<List />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );
