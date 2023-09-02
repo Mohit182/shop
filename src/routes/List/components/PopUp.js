@@ -139,6 +139,7 @@ const AddPopUp = (props) => {
                 setEditValues({});
               }}
               sx={{ margin: "10px" }}
+              disabled={weight.length === 0}
             >
               {handler === "add" ? "Add" : "Edit"}
             </Button>
