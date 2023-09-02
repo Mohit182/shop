@@ -91,7 +91,7 @@ const AddPopUp = (props) => {
           </h1>
           <TextField
             placeholder="Weight"
-            type="text"
+            type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             sx={{ margin: "10px" }}
