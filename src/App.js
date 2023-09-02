@@ -9,21 +9,15 @@ import React from "react";
 import { useCookies } from "react-cookie";
 function App() {
   const [token, setToken] = React.useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-
-  React.useEffect(() => {
-    setToken(cookies.token);
-  }, [cookies.token]);
-
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   return (
     <div className="App">
-      {token !== undefined && token !== null && (
+      {cookies.token !== undefined && cookies.token !== null && cookies.token.length > 0 && (
         <Button
           variant="contained"
           onClick={() => {
             removeCookie("token");
-            window.location.reload();
           }}
           style={{
             position: "absolute",

@@ -8,7 +8,7 @@ import AddPopUp from "./components/PopUp";
 import { useCookies } from "react-cookie";
 import { Menu, MenuItem } from "@mui/material";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Delete from "./components/Delete";
 
 const ListItem = ({
@@ -86,13 +86,17 @@ const List = () => {
   const [toggle, setToggle] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const history = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    if (cookies.token === undefined || cookies.token === null) {
+    if (
+      cookies.token === undefined ||
+      cookies.token === null ||
+      cookies.token.length === 0
+    ) {
       history("/login");
     }
   }, [cookies.token]);
@@ -300,9 +304,11 @@ const List = () => {
             >
               <p>Total</p>
               <p>
-                {data20c.reduce((total, item) => {
-                  return total + parseInt(item.weight) * 0.88;
-                }, 0)}
+                {data20c
+                  .reduce((total, item) => {
+                    return total + parseInt(item.weight) * 0.88;
+                  }, 0)
+                  .toFixed(4)}
               </p>
             </div>
           </Paper>
@@ -339,9 +345,11 @@ const List = () => {
             >
               <p>Total</p>
               <p>
-                {data22c.reduce((total, item) => {
-                  return total + parseInt(item.weight) * 0.96;
-                }, 0)}
+                {data22c
+                  .reduce((total, item) => {
+                    return total + parseInt(item.weight) * 0.96;
+                  }, 0)
+                  .toFixed(4)}
               </p>
             </div>
           </Paper>
@@ -378,9 +386,11 @@ const List = () => {
             >
               <p>Total</p>
               <p>
-                {datagold.reduce((total, item) => {
-                  return total + parseInt(item.weight) * 0.995;
-                }, 0)}
+                {datagold
+                  .reduce((total, item) => {
+                    return total + parseInt(item.weight) * 0.995;
+                  }, 0)
+                  .toFixed(4)}
               </p>
             </div>
           </Paper>
@@ -397,16 +407,18 @@ const List = () => {
             margin: "20px",
           }}
         >
-          Total:{" "}
-          {data20c.reduce((total, item) => {
-            return total + parseInt(item.weight) * 0.88;
-          }, 0) +
-            data22c.reduce((total, item) => {
-              return total + parseInt(item.weight) * 0.96;
-            }, 0) -
-            datagold.reduce((total, item) => {
-              return total + parseInt(item.weight) * 0.995;
-            }, 0)}
+          Total Remaining:{" "}
+          {parseFloat(
+            data20c.reduce((total, item) => {
+              return total + parseInt(item.weight) * 0.88;
+            }, 0) +
+              data22c.reduce((total, item) => {
+                return total + parseInt(item.weight) * 0.96;
+              }, 0) -
+              datagold.reduce((total, item) => {
+                return total + parseInt(item.weight) * 0.995;
+              }, 0)
+          ).toFixed(4)}
         </Grid>
       </Grid>
       {addHandler && (

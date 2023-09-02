@@ -73,15 +73,6 @@ function Login() {
         >
           Sign In
         </Button>
-        <Button
-          onClick={registerHandler}
-          variant="outlined"
-          color="primary"
-          className="login-registerButton"
-          sx={{ margin: "10px" }}
-        >
-          Create your Account
-        </Button>
       </div>
     </div>
   );

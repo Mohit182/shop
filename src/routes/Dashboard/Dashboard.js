@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   React.useEffect(() => {
-    if (cookies.token === undefined || cookies.token === null) {
+    if (cookies.token === undefined || cookies.token === null || cookies.token.length === 0) {
       history("/login");
     }
   }, [cookies.token]);
