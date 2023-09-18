@@ -306,7 +306,7 @@ const List = () => {
               <p>
                 {data20c
                   .reduce((total, item) => {
-                    return total + parseInt(item.weight) * 0.88;
+                    return total + parseFloat(item.weight) * 0.88;
                   }, 0)
                   .toFixed(4)}
               </p>
@@ -347,7 +347,7 @@ const List = () => {
               <p>
                 {data22c
                   .reduce((total, item) => {
-                    return total + parseInt(item.weight) * 0.96;
+                    return total + parseFloat(item.weight) * 0.96;
                   }, 0)
                   .toFixed(4)}
               </p>
@@ -388,7 +388,7 @@ const List = () => {
               <p>
                 {datagold
                   .reduce((total, item) => {
-                    return total + parseInt(item.weight) * 0.995;
+                    return total + parseFloat(item.weight) * 0.995;
                   }, 0)
                   .toFixed(4)}
               </p>
@@ -410,13 +410,13 @@ const List = () => {
           Total Remaining:{" "}
           {parseFloat(
             data20c.reduce((total, item) => {
-              return total + parseInt(item.weight) * 0.88;
+              return total + parseFloat(item.weight) * 0.88;
             }, 0) +
               data22c.reduce((total, item) => {
-                return total + parseInt(item.weight) * 0.96;
+                return total + parseFloat(item.weight) * 0.96;
               }, 0) -
               datagold.reduce((total, item) => {
-                return total + parseInt(item.weight) * 0.995;
+                return total + parseFloat(item.weight) * 0.995;
               }, 0)
           ).toFixed(4)}
         </Grid>
